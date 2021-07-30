@@ -1,7 +1,6 @@
 import numpy as np
 
 
-
 ATTRIBUTES = 1 #size of the feature vector
 PICKS = 6
 
@@ -11,7 +10,7 @@ MAX = 49
 LAPLACE_M = 3
 
 
-class Pick:
+class Pick:#3-8-14-22-23-45
     def __init__(self, pos, data, f_vec, classes):
         self.pos = pos
         self.data = data
@@ -40,7 +39,7 @@ def learn(pick):
             for j in range(MIN, MAX+1):
                 attr_occs = np.count_nonzero(np.logical_and(pick.data[:, i] == j, pick.data[:, -1] == c))
                 if attr_occs > 0:
-                    class_ocs = np.count_nonzero(pick.data[:,-1] == c)
+                    class_ocs = np.count_nonzero(pick.classes == c)
                     probabilities[(i, j, c)] = attr_occs/class_ocs
                 else:
                     probabilities[(i, j, c)] = LAPLACE_M * (1/(MAX-(PICKS-1)))
